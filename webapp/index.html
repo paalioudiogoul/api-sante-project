@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Santé - Téléconsultation Médicale</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="logo">🏥 API Santé</h1>
+            <ul class="nav-menu">
+                <li><a href="#" onclick="showPage('home')">Accueil</a></li>
+                <li><a href="#" onclick="showPage('doctors')">Médecins</a></li>
+                <li><a href="#" onclick="showPage('book')">Réserver RDV</a></li>
+                <li><a href="#" onclick="showPage('myappointments')">Mes RDV</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- CONTAINER PRINCIPAL -->
+    <div class="container">
+
+        <!-- PAGE 1: ACCUEIL -->
+        <div id="home" class="page active">
+            <div class="welcome-section">
+                <h1>Bienvenue sur API Santé</h1>
+                <p>Plateforme de téléconsultation médicale</p>
+                <div class="welcome-cards">
+                    <div class="card">
+                        <h3>👨‍⚕️ Trouvez un Médecin</h3>
+                        <p>Consultez la liste de nos médecins spécialisés</p>
+                        <button onclick="showPage('doctors')" class="btn">Voir les médecins</button>
+                    </div>
+                    <div class="card">
+                        <h3>📅 Réservez un RDV</h3>
+                        <p>Choisissez votre créneau disponible</p>
+                        <button onclick="showPage('book')" class="btn">Réserver maintenant</button>
+                    </div>
+                    <div class="card">
+                        <h3>📋 Mes Rendez-vous</h3>
+                        <p>Consultez tous vos rendez-vous réservés</p>
+                        <button onclick="showPage('myappointments')" class="btn">Voir mes RDV</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 2: LISTE DES MÉDECINS -->
+        <div id="doctors" class="page">
+            <h1>Liste des Médecins</h1>
+            <div id="doctorsList" class="doctors-grid">
+                <p class="loading">Chargement des médecins...</p>
+            </div>
+        </div>
+
+        <!-- PAGE 3: RÉSERVER UN RDV -->
+        <div id="book" class="page">
+            <h1>Réserver un Rendez-vous</h1>
+            
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="patientName">Votre Nom :</label>
+                    <input type="text" id="patientName" placeholder="Entrez votre nom">
+                </div>
+
+                <div class="form-group">
+                    <label for="patientEmail">Votre Email :</label>
+                    <input type="email" id="patientEmail" placeholder="Entrez votre email">
+                </div>
+
+                <div class="form-group">
+                    <label for="patientDob">Date de Naissance :</label>
+                    <input type="date" id="patientDob">
+                </div>
+
+                <div class="form-group">
+                    <label for="doctorSelect">Sélectionnez un Médecin :</label>
+                    <select id="doctorSelect" onchange="loadSlots()">
+                        <option value="">-- Choisir un médecin --</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="slotSelect">Sélectionnez un Créneau :</label>
+                    <select id="slotSelect">
+                        <option value="">-- Choisir un créneau --</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="reason">Raison de la Consultation :</label>
+                    <textarea id="reason" placeholder="Décrivez votre problème de santé"></textarea>
+                </div>
+
+                <button class="btn btn-primary" onclick="bookAppointment()">Réserver le RDV</button>
+            </div>
+
+            <div id="bookMessage" class="message"></div>
+        </div>
+
+        <!-- PAGE 4: MES RENDEZ-VOUS -->
+        <div id="myappointments" class="page">
+            <h1>Mes Rendez-vous</h1>
+            
+            <div class="form-group" style="margin-bottom: 20px;">
+                <label for="myPatientEmail">Email pour voir mes RDV :</label>
+                <input type="email" id="myPatientEmail" placeholder="Entrez votre email">
+                <button class="btn" onclick="loadMyAppointments()">Charger mes RDV</button>
+            </div>
+
+            <div id="appointmentsList" class="appointments-list">
+                <p class="info">Entrez votre email pour voir vos rendez-vous</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>&copy; 2026 API Santé - Plateforme de Téléconsultation Médicale</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
